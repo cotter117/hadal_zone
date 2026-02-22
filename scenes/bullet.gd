@@ -14,6 +14,8 @@ func _on_body_entered(body):
 	if body.is_in_group("enemies"):
 		if body.has_method("take_damage"):
 			body.take_damage(1)
+			ScoreCounter.add_kill() # Updates kill display
 		else:
 			body.queue_free # Fallback
 		queue_free()
+		

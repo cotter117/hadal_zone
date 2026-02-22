@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bri0u25nxapen"]
+
+[ext_resource type="Script" path="res://score_counter.gd" id="1_qsywv"]
+
+[node name="ScoreCounter" type="Node"]
+script = ExtResource("1_qsywv")
