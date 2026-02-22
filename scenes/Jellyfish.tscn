@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://brmgxrp2oev6h"]
+
+[ext_resource type="Script" path="res://scenes/jellyfish.gd" id="1_mcdmu"]
+[ext_resource type="Texture2D" uid="uid://bwwyc8ucfayc6" path="res://assets/sprites/jellyfish_sprite_testing.png" id="2_0wkry"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x68il"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0wkry")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_e7fkk"]
+height = 34.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_mcdmu")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.032, 0.032)
+sprite_frames = SubResource("SpriteFrames_x68il")
+animation = &"moving"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1)
+shape = SubResource("CapsuleShape2D_e7fkk")

@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://cd4lp2mp6daaj"]
+
+[ext_resource type="Script" path="res://scenes/player.gd" id="1_my6jy"]
+[ext_resource type="Texture2D" uid="uid://bajp71lnftr38" path="res://assets/sprites/sub_sprite_testing.png" id="1_rj3j6"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ccai7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_rj3j6")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 3.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qu5us"]
+radius = 13.0
+height = 26.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
+position = Vector2(8, 7)
+script = ExtResource("1_my6jy")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.016, 0.016)
+sprite_frames = SubResource("SpriteFrames_ccai7")
+animation = &"moving"
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, 0)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_qu5us")
+debug_color = Color(0.893209, 0.249089, 0.520831, 0.42)
+metadata/_edit_group_ = true

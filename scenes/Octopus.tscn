@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://dehart8rvo0r0"]
+
+[ext_resource type="Script" path="res://scenes/octopus.gd" id="1_tjc33"]
+[ext_resource type="Texture2D" uid="uid://do8m2cgli0wul" path="res://assets/sprites/octopus_sprite_testing.png" id="2_16mrt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mqmrw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_16mrt")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pspmi"]
+radius = 12.0
+height = 26.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_tjc33")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.102, 0.102)
+sprite_frames = SubResource("SpriteFrames_mqmrw")
+animation = &"moving"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_pspmi")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://dwicw0f7gdrit"]
+
+[ext_resource type="Texture2D" uid="uid://cyxgc8cqca4l5" path="res://assets/sprites/shark_sprite_testing.png" id="1_7saup"]
+[ext_resource type="Script" path="res://scenes/shark.gd" id="1_7ya2r"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2w4wu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_7saup")
+}],
+"loop": true,
+"name": &"moving",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_liwqx"]
+radius = 18.0
+height = 58.0
+
+[node name="CharacterBody2D" type="CharacterBody2D" groups=["enemies"]]
+script = ExtResource("1_7ya2r")
+metadata/_edit_group_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.184, 0.184)
+sprite_frames = SubResource("SpriteFrames_2w4wu")
+animation = &"moving"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1, -3)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_liwqx")

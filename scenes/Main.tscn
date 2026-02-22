@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjgohjlwpjean"]
+
+[ext_resource type="Script" path="res://scenes/main.gd" id="1_vwd6f"]
+[ext_resource type="PackedScene" uid="uid://cd4lp2mp6daaj" path="res://scenes/Player.tscn" id="2_4qmop"]
+[ext_resource type="PackedScene" uid="uid://brmgxrp2oev6h" path="res://scenes/Jellyfish.tscn" id="3_aqrbj"]
+[ext_resource type="PackedScene" uid="uid://dehart8rvo0r0" path="res://scenes/Octopus.tscn" id="4_0hlyb"]
+[ext_resource type="PackedScene" uid="uid://dwicw0f7gdrit" path="res://scenes/Shark.tscn" id="5_232d5"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_vwd6f")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -535.0
+offset_top = -959.0
+offset_right = 545.0
+offset_bottom = 961.0
+color = Color(3.83503e-05, 2.6956e-08, 0.00111794, 1)
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("2_4qmop")]
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+position = Vector2(-8, -7)
+
+[node name="CharacterBody2D2" parent="." instance=ExtResource("3_aqrbj")]
+
+[node name="CharacterBody2D3" parent="." instance=ExtResource("4_0hlyb")]
+
+[node name="CharacterBody2D4" parent="." instance=ExtResource("5_232d5")]
