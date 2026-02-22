@@ -7,6 +7,7 @@ var enemy_scenes = []
 var player: Node2D
 var spawn_timer: Timer
 var game_timer: float = 0.0
+var game_over: bool = false
 
 func _ready():
 	# Load enemy scenes
@@ -15,6 +16,8 @@ func _ready():
 	enemy_scenes.append(preload("res://scenes/Shark.tscn"))      # Hard enemy
 	
 	player = get_tree().get_first_node_in_group("player")
+	if player:
+		player.player_died.connect(_on_player_died)
 	
 	# Setup timer
 	spawn_timer = Timer.new()
@@ -24,7 +27,15 @@ func _ready():
 	spawn_timer.start()
 
 func _process(delta):
-	game_timer += delta
+	if not game_over:
+		game_timer += delta
+	
+func _on_player_died():
+	game_over = true
+	print("GAME OVER")
+	# Stop enemy spawning
+	spawn_timer.stop()
+	# TODO show game over screen
 
 func _spawn_enemy():
 	if not player:

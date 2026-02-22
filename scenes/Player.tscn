@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd4lp2mp6daaj"]
+[gd_scene load_steps=7 format=3 uid="uid://cd4lp2mp6daaj"]
 
 [ext_resource type="Script" path="res://scenes/player.gd" id="1_my6jy"]
 [ext_resource type="Texture2D" uid="uid://bajp71lnftr38" path="res://assets/sprites/sub_sprite_testing.png" id="1_rj3j6"]
+[ext_resource type="Script" path="res://scenes/hitbox.gd" id="3_7dhvx"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_ccai7"]
 animations = [{
@@ -15,8 +16,12 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qu5us"]
-radius = 13.0
-height = 26.0
+radius = 18.0
+height = 40.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x60bj"]
+radius = 19.0
+height = 40.0
 
 [node name="CharacterBody2D" type="CharacterBody2D" groups=["player"]]
 position = Vector2(8, 7)
@@ -30,8 +35,16 @@ animation = &"moving"
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, 0)
+position = Vector2(1, 1)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_qu5us")
 debug_color = Color(0.893209, 0.249089, 0.520831, 0.42)
 metadata/_edit_group_ = true
+
+[node name="Hitbox" type="Area2D" parent="."]
+script = ExtResource("3_7dhvx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(1, 1)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_x60bj")
