@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
-@export var speed: float = 150.0
+@export var speed: float = 120.0
+@export var health: int = 3
+
 var player: Node2D
 
 func _ready():
@@ -11,3 +13,8 @@ func _physics_process(delta):
 		var direction = (player.global_position - global_position).normalized()
 		velocity = direction * speed
 		move_and_slide()
+
+func take_damage(amount: int):
+	health -= amount
+	if health <= 0:
+		queue_free()

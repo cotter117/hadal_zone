@@ -6,12 +6,13 @@ extends Node2D
 var enemy_scenes = []
 var player: Node2D
 var spawn_timer: Timer
+var game_timer: float = 0.0
 
 func _ready():
 	# Load enemy scenes
-	enemy_scenes.append(preload("res://scenes/Jellyfish.tscn"))
-	enemy_scenes.append(preload("res://scenes/Octopus.tscn"))
-	enemy_scenes.append(preload("res://scenes/Shark.tscn"))
+	enemy_scenes.append(preload("res://scenes/Jellyfish.tscn"))  # Easy enemy
+	enemy_scenes.append(preload("res://scenes/Octopus.tscn"))    # Medium enemy  
+	enemy_scenes.append(preload("res://scenes/Shark.tscn"))      # Hard enemy
 	
 	player = get_tree().get_first_node_in_group("player")
 	
@@ -22,12 +23,25 @@ func _ready():
 	add_child(spawn_timer)
 	spawn_timer.start()
 
+func _process(delta):
+	game_timer += delta
+
 func _spawn_enemy():
 	if not player:
 		return
 	
-	# Pick random enemy
-	var enemy_scene = enemy_scenes[randi() % enemy_scenes.size()]
+	# Progressive enemy selection based on time
+	var enemy_scene
+	if game_timer < 30.0:
+		# First 30 seconds: Only jellyfish (easy)
+		enemy_scene = enemy_scenes[0]
+	elif game_timer < 60.0:
+		# 30-60 seconds: Jellyfish and octopus
+		enemy_scene = enemy_scenes[randi() % 2]
+	else:
+		# After 60 seconds: All enemy types
+		enemy_scene = enemy_scenes[randi() % enemy_scenes.size()]
+	
 	var enemy = enemy_scene.instantiate()
 	
 	# Spawn at random position around player

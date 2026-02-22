@@ -12,6 +12,8 @@ func _physics_process(delta):
 
 func _on_body_entered(body):
 	if body.is_in_group("enemies"):
-		print("Bullet hit: ", body.name)
-		body.queue_free()
+		if body.has_method("take_damage"):
+			body.take_damage(1)
+		else:
+			body.queue_free # Fallback
 		queue_free()
