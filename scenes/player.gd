@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @export var speed: float = 300.0
-@export var fire_rate: float = 0.5 # Shots per second
+@export var fire_rate: float = 0.5
 @export var bullet_speed: float = 500.0
 
 var bullet_scene = preload("res://scenes/Bullet.tscn")
@@ -10,7 +10,7 @@ var fire_timer: Timer
 func _ready():
 	print("Player submarine initialized")
 	
-	# Setupe auto-fire timer
+	# Setup auto-fire timer
 	fire_timer = Timer.new()
 	fire_timer.wait_time = fire_rate
 	fire_timer.timeout.connect(_fire_bullet)
@@ -34,13 +34,13 @@ func handle_input():
 		input_vector.x += 1
 	
 	velocity = input_vector.normalized() * speed
-	
+
 func _fire_bullet():
-	# FInd nearest enemy
+	# Find nearest enemy
 	var enemies = get_tree().get_nodes_in_group("enemies")
 	if enemies.is_empty():
 		return
-		
+	
 	var nearest_enemy = null
 	var nearest_distance = INF
 	
@@ -55,7 +55,7 @@ func _fire_bullet():
 		bullet.global_position = global_position
 		
 		# Aim at nearest enemy
-		var direction = (nearest_enemy.global_position - global_position)
+		var direction = (nearest_enemy.global_position - global_position).normalized()
 		bullet.velocity = direction * bullet_speed
-	
+		
 		get_parent().add_child(bullet)
