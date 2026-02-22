@@ -1,8 +1,13 @@
 extends CharacterBody2D
 
-@export var speed: float = 300.0
-@export var fire_rate: float = 1
-@export var bullet_speed: float = 500.0
+@export var base_speed: float = 300.0
+@export var current_speed: float
+@export var base_fire_rate: float = 1.0
+@export var current_fire_rate: float
+@export var base_damage: float = 10.0
+@export var current_damage: float
+@export var base_weapon_speed: float = 500.0
+@export var current_weapon_speed: float
 @export var max_health: int = 3
 @export var invincibility_time: float = 1.0
 
@@ -19,10 +24,12 @@ signal health_changed(new_health)
 func _ready():
 	print("Player submarine initialized")
 	current_health = max_health
+	update_speed()
+	update_weapon_stats()
 	
 	# Setup auto-fire timer
 	fire_timer = Timer.new()
-	fire_timer.wait_time = fire_rate
+	fire_timer.wait_time = current_fire_rate
 	fire_timer.timeout.connect(_fire_bullet)
 	add_child(fire_timer)
 	fire_timer.start()
@@ -56,7 +63,7 @@ func handle_input():
 	if Input.is_action_pressed("move_right"):
 		input_vector.x += 1
 	
-	velocity = input_vector.normalized() * speed
+	velocity = input_vector.normalized() * current_speed
 
 func _fire_bullet():
 	# Find nearest enemy
@@ -79,7 +86,7 @@ func _fire_bullet():
 		
 		# Aim at nearest enemy
 		var direction = (nearest_enemy.global_position - global_position).normalized()
-		bullet.velocity = direction * bullet_speed
+		bullet.velocity = direction * current_weapon_speed
 		
 		get_parent().add_child(bullet)
 
@@ -110,3 +117,11 @@ func die():
 	invincibility_timer.stop()
 	# Disable movement
 	set_physics_process(false)
+	
+func update_speed():
+	current_speed = base_speed * UpgradeManager.get_stat("speed_multiplier")
+
+func update_weapon_stats():
+	current_damage = base_damage * UpgradeManager.get_stat("damage_multiplier")
+	current_fire_rate = base_fire_rate * UpgradeManager.get_stat("fire_rate_multiplier")
+	current_weapon_speed = base_weapon_speed * UpgradeManager.get_stat("weapon_speed_multiplier")

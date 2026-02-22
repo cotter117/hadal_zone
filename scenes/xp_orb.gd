@@ -11,7 +11,8 @@ func _ready():
 func _process(delta):
 	if player:
 		var distance = global_position.distance_to(player.global_position)
-		if distance < 50:  # Magnet range
+		var magnet_range = 50 + UpgradeManager.get_stat("magnet_range_bonus")
+		if distance < magnet_range:  # Magnet range
 			var direction = (player.global_position - global_position).normalized()
 			global_position += direction * move_speed * delta
 

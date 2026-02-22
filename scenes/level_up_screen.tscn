@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://bstjkbgujd2s"]
+
+[ext_resource type="Script" path="res://level_up_screen.gd" id="1_pohky"]
+
+[node name="LevelUpScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_pohky")
+
+[node name="LevelLabel" type="Label" parent="."]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 23.0
+
+[node name="CardContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0

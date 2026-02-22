@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 ScoreCounter="*res://scenes/score_counter.tscn"
 XpManager="*res://scenes/xp_manager.tscn"
+UpgradeManager="*res://scenes/upgrade_manager.tscn"
 
 [display]
 

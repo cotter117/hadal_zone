@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://cjgohjlwpjean"]
+[gd_scene load_steps=7 format=3 uid="uid://cjgohjlwpjean"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_vwd6f"]
 [ext_resource type="PackedScene" uid="uid://cd4lp2mp6daaj" path="res://scenes/Player.tscn" id="2_4qmop"]
+[ext_resource type="PackedScene" uid="uid://bstjkbgujd2s" path="res://scenes/level_up_screen.tscn" id="2_otapn"]
 [ext_resource type="Script" path="res://scenes/score_display.gd" id="3_og621"]
 [ext_resource type="Script" path="res://scenes/kill_count.gd" id="4_61f2g"]
 [ext_resource type="Script" path="res://scenes/xp_bar.gd" id="5_pw2i1"]
@@ -51,3 +52,5 @@ offset_right = 2.0
 grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("5_pw2i1")
+
+[node name="LevelUpScreen" parent="." instance=ExtResource("2_otapn")]
