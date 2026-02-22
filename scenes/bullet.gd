@@ -14,8 +14,14 @@ func _on_body_entered(body):
 	if body.is_in_group("enemies"):
 		if body.has_method("take_damage"):
 			body.take_damage(1)
-			ScoreCounter.add_kill() # Updates kill display
+			#ScoreCounter.add_kill() # Updates kill display
+			#var xp_orb = preload("res://scenes/xp_orb.tscn").instantiate()
+			#xp_orb.global_position = global_position
+			#get_parent().add_child(xp_orb)
 		else:
 			body.queue_free # Fallback
 		queue_free()
-		
+		ScoreCounter.add_kill() # Updates kill display
+		var xp_orb = preload("res://scenes/xp_orb.tscn").instantiate()
+		xp_orb.global_position = global_position
+		get_parent().add_child(xp_orb)
