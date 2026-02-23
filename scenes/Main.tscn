@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjgohjlwpjean"]
+[gd_scene load_steps=9 format=3 uid="uid://cjgohjlwpjean"]
 
 [ext_resource type="Script" path="res://scenes/main.gd" id="1_vwd6f"]
 [ext_resource type="PackedScene" uid="uid://cd4lp2mp6daaj" path="res://scenes/Player.tscn" id="2_4qmop"]
 [ext_resource type="PackedScene" uid="uid://bstjkbgujd2s" path="res://scenes/level_up_screen.tscn" id="2_otapn"]
 [ext_resource type="Script" path="res://scenes/score_display.gd" id="3_og621"]
+[ext_resource type="PackedScene" uid="uid://d1lracskqqqx1" path="res://scenes/game_over_screen.tscn" id="3_xa30f"]
 [ext_resource type="Script" path="res://scenes/kill_count.gd" id="4_61f2g"]
 [ext_resource type="Script" path="res://scenes/xp_bar.gd" id="5_pw2i1"]
+[ext_resource type="Script" path="res://scenes/game_manager.gd" id="8_p27m6"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_vwd6f")
@@ -22,7 +24,12 @@ color = Color(3.83503e-05, 2.6956e-08, 0.00111794, 1)
 [node name="PlayerCamera" type="Camera2D" parent="Player"]
 position = Vector2(-8, -7)
 
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("8_p27m6")
+
 [node name="UI" type="CanvasLayer" parent="."]
+
+[node name="GameOverScreen" parent="UI" instance=ExtResource("3_xa30f")]
 
 [node name="ScoreDisplay" type="Label" parent="UI"]
 anchors_preset = 5
@@ -53,4 +60,4 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("5_pw2i1")
 
-[node name="LevelUpScreen" parent="." instance=ExtResource("2_otapn")]
+[node name="LevelUpScreen" parent="UI" instance=ExtResource("2_otapn")]

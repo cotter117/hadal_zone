@@ -18,7 +18,7 @@ animations = [{
 radius = 1.0
 height = 6.0
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=["bullets"]]
 script = ExtResource("1_l41lx")
 metadata/_edit_group_ = true
 

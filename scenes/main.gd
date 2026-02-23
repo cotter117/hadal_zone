@@ -40,7 +40,7 @@ func _on_player_died():
 func _spawn_enemy():
 	if not player:
 		return
-	
+	add_to_group("spawners")
 	# Progressive enemy selection based on time
 	var enemy_scene
 	if game_timer < 30.0:

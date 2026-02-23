@@ -21,7 +21,7 @@ radius = 13.0
 script = ExtResource("1_wu4uv")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." groups=["xp_orbs"]]
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_3uw6y")
 

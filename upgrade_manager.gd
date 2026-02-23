@@ -29,9 +29,20 @@ func apply_upgrade(upgrade_type: String):
 	upgrade_applied.emit(upgrade_type)
 
 func get_stat(stat_name: String):
-	return player_stats.get(stat_name, 1.0)
+	if player_stats.has(stat_name):
+		return player_stats[stat_name]
+	else:
+		# Return default values for missing keys
+		match stat_name:
+			"fire_rate_multiplier", "speed_multiplier", "weapons_speed_multiplier", "damage_multiplier":
+				return 1.0
+			"max_health_bonus", "magnet_range_bonus":
+				return 0
+			_:
+				return 1.0
 
 func reset_stats():
+	player_stats.clear()
 	player_stats = {
 		"damage_multiplier": 1.0,
 		"fire_rate_multiplier": 1.0,
