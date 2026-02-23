@@ -7,7 +7,8 @@ var upgrade_cards = [
 	{"name": "Fire Rate +", "description": "Shoot faster", "type": "fire_rate"},
 	{"name": "Speed +", "description": "Move faster", "type": "speed"},
 	{"name": "Health +", "description": "Increase max health", "type": "health"},
-	{"name": "Magnet +", "description": "Larger XP pickup range", "type": "magnet"}
+	{"name": "Magnet +", "description": "Larger XP pickup range", "type": "magnet"},
+	{"name": "Weapon +", "description": "Faster weapon speed", "type": "weapon"}
 ]
 
 func _ready():

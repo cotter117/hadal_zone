@@ -1,7 +1,7 @@
 extends Area2D
 
 var xp_value: int = 1
-var move_speed: float = 100.0
+var move_speed: float = 500.0
 var player: Node2D
 
 func _ready():
