@@ -4,8 +4,8 @@ extends Node
 
 func _ready():
 	# Connect to player death signal
-	var player = get_node("../Player")
-	if player and player.has_signal("player_died"):
+	var player = get_tree().get_first_node_in_group("player")
+	if player:
 		player.player_died.connect(_on_player_died)
 
 func _on_player_died():

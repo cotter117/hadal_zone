@@ -1,6 +1,7 @@
 extends Area2D
 
 var velocity: Vector2 = Vector2.ZERO
+var damage: float = 1.0
 
 func _ready():
 	body_entered.connect(_on_body_entered)
@@ -11,17 +12,11 @@ func _physics_process(delta):
 	position += velocity * delta
 
 func _on_body_entered(body):
+	#TODO - all enemies die on singel hit regardless of health. Even when healt set in inspector
 	if body.is_in_group("enemies"):
 		if body.has_method("take_damage"):
-			body.take_damage(1)
-			#ScoreCounter.add_kill() # Updates kill display
-			#var xp_orb = preload("res://scenes/xp_orb.tscn").instantiate()
-			#xp_orb.global_position = global_position
-			#get_parent().add_child(xp_orb)
+			body.take_damage(damage)
 		else:
-			body.queue_free # Fallback
+			body.queue_free()
 		queue_free()
-		ScoreCounter.add_kill() # Updates kill display
-		var xp_orb = preload("res://scenes/xp_orb.tscn").instantiate()
-		xp_orb.global_position = global_position
-		get_parent().add_child(xp_orb)
+		

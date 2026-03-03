@@ -6,5 +6,5 @@ func _ready():
 func _on_body_entered(body):
 	if body.is_in_group("enemies"):
 		var player = get_parent()
-		if player.has_method("take_damage"):
+		if player.has_method("take_damage") and not player.is_invincible:
 			player.take_damage(1)

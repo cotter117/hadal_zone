@@ -9,10 +9,9 @@ var xp_needed: int = 10
 
 func add_xp(amount: int):
 	current_xp += amount
-	xp_changed.emit(current_xp, xp_needed)
-	
-	if current_xp >= xp_needed:
+	while current_xp >= xp_needed:
 		level_up_player()
+	xp_changed.emit(current_xp, xp_needed)
 
 func level_up_player():
 	current_level += 1
@@ -24,3 +23,4 @@ func reset():
 	current_xp = 0
 	current_level = 1
 	xp_needed = 10
+	xp_changed.emit(current_xp, xp_needed)

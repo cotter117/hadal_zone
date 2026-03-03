@@ -10,6 +10,7 @@ var game_timer: float = 0.0
 var game_over: bool = false
 
 func _ready():
+	add_to_group("spawners")
 	# Load enemy scenes
 	enemy_scenes.append(preload("res://scenes/Jellyfish.tscn"))  # Easy enemy
 	enemy_scenes.append(preload("res://scenes/Octopus.tscn"))    # Medium enemy  
@@ -38,9 +39,9 @@ func _on_player_died():
 	# TODO show game over screen
 
 func _spawn_enemy():
+#	# TODO there is a bug with enemy spawns after restart where some spawn invisible.
 	if not player:
 		return
-	add_to_group("spawners")
 	# Progressive enemy selection based on time
 	var enemy_scene
 	if game_timer < 30.0:

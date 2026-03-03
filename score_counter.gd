@@ -9,6 +9,7 @@ var depth_rate: float = 10.0  # meters per second
 var kill_count: int = 0
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_PAUSABLE
 	set_process(true)
 
 func _process(delta):

@@ -22,19 +22,14 @@ func show_game_over():
 	level_label.text = "Level Reached: " + str(XpManager.current_level)
 
 func _on_restart_pressed():
-	# Disable all enemy processing first
-	get_tree().call_group("enemies", "set_process", false)
-	get_tree().call_group("enemies", "set_physics_process", false)
-	
-	# Stop enemies spawning
-	get_tree().call_group("spawners", "set_process", false)
-	
-	# Reset all systems
+	#TODO - Game freezes when restart is pressed. Enemies all dissapear, no spawning of new enemies, xp_orbs remain, player cannot move. 
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		enemy.queue_free()
+	for spawner in get_tree().get_nodes_in_group("spawners"):
+		spawner.remove_from_group("spawners")
 	ScoreCounter.reset()
 	XpManager.reset()
 	UpgradeManager.reset_stats()
-	
-	# Restart immediately
 	get_tree().paused = false
 	get_tree().reload_current_scene()
 

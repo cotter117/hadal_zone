@@ -23,9 +23,11 @@ signal health_changed(new_health)
 
 func _ready():
 	print("Player submarine initialized")
+	max_health = 3 + UpgradeManager.get_stat("max_health_bonus")
 	current_health = max_health
 	update_speed()
 	update_weapon_stats()
+	UpgradeManager.upgrade_applied.connect(_on_upgrade_applied)
 	
 	# Setup auto-fire timer
 	fire_timer = Timer.new()
@@ -43,6 +45,8 @@ func _ready():
 func _physics_process(delta):
 	handle_input()
 	move_and_slide()
+	var viewport_size = get_viewport_rect().size
+	global_position = global_position.clamp(Vector2.ZERO, viewport_size)
 	
 	# Visual feedback when invincible
 	if is_invincible:
@@ -87,6 +91,7 @@ func _fire_bullet():
 		# Aim at nearest enemy
 		var direction = (nearest_enemy.global_position - global_position).normalized()
 		bullet.velocity = direction * current_weapon_speed
+		bullet.damage = current_damage
 		
 		get_parent().add_child(bullet)
 
@@ -111,6 +116,9 @@ func _end_invincibility():
 
 func die():
 	print("Player died!")
+	set_physics_process(false)
+	set_process_input(false)
+	set_process_unhandled_input(false)
 	player_died.emit()
 	# Stop all timers
 	fire_timer.stop()
@@ -123,5 +131,14 @@ func update_speed():
 
 func update_weapon_stats():
 	current_damage = base_damage * UpgradeManager.get_stat("damage_multiplier")
-	current_fire_rate = base_fire_rate * UpgradeManager.get_stat("fire_rate_multiplier")
+	current_fire_rate = base_fire_rate / UpgradeManager.get_stat("fire_rate_multiplier")
 	current_weapon_speed = base_weapon_speed * UpgradeManager.get_stat("weapon_speed_multiplier")
+
+func _on_upgrade_applied(type: String):
+	if type == "health":
+		var old_max = max_health
+		max_health = 3 + UpgradeManager.get_stat("max_health_bonus")
+		current_health += (max_health - old_max) # Heal the bonus amount
+	update_speed()
+	update_weapon_stats()
+	fire_timer.wait_time = current_fire_rate # Update active timer

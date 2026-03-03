@@ -8,7 +8,8 @@ var upgrade_cards = [
 	{"name": "Speed +", "description": "Move faster", "type": "speed"},
 	{"name": "Health +", "description": "Increase max health", "type": "health"},
 	{"name": "Magnet +", "description": "Larger XP pickup range", "type": "magnet"},
-	{"name": "Weapon +", "description": "Faster weapon speed", "type": "weapon"}
+	{"name": "Weapon +", "description": "Faster weapon speed", "type": "weapon"},
+	{"name": "Damage +", "description": "Hit harder", "type": "damage"}
 ]
 
 func _ready():
@@ -27,6 +28,7 @@ func show_level_up_screen(level: int):
 	
 	# Clear previous cards
 	for child in card_container.get_children():
+		card_container.remove_child(child)
 		child.queue_free()
 	
 	# Show 3 random upgrade cards
